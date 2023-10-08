@@ -1,4 +1,6 @@
 #pragma once
+#include <pthread.h>
+#include <stdbool.h>
 
 #define INT_CAST(value) (*((int*)(value)))
 #define CHAR_CAST(value) (*((char*)(value)))
@@ -10,7 +12,6 @@
 
 
 typedef enum {Int , Char , Float , Double} types;
-typedef enum {NO_DATA , NO_SPACE} BUFF_RETURN;
 
 
 
@@ -25,6 +26,9 @@ typedef struct {
    int             __remove_index;
    GENERIC_TYPE    __buffer;
    types           __type;
+   pthread_mutex_t __mutx;
+
+   /*public data*/
    unsigned int    size;
    unsigned int    remaining;
 
@@ -36,11 +40,12 @@ typedef struct {
 } circular_buffer_t;
 
 
-/*private funciton definations*/
+/*Methods declaration*/
 NO_RETURN cb_init(void* self , types type , unsigned int size);
 GENERIC_TYPE cb_insert(void* self , GENERIC_TYPE value);
 GENERIC_TYPE cb_remove(void* self);
 
+/*utility function*/
 void print_function(void*);
 
 

@@ -26,7 +26,6 @@ typedef struct {
    int             __remove_index;
    GENERIC_TYPE    __buffer;
    types           __type;
-   pthread_mutex_t __mutx;
 
    /*public data*/
    unsigned int    size;

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <inttypes.h>
+#include <pthread.h>
 #include "src/circular_buffer.h"
 
 
@@ -7,7 +8,7 @@ int main (int argc , char* argv[])
 {
 	int values[10] = {1 , 2, 5 , 9 , 85 , 27 , 38 , 49 , 45 , 10};
 	char c_values[10] = "helloworld";
-
+	int single_value = 199;
 	/* initializing 2 buffers one for int and the other for char */
 	circular_buffer_t cb1 = initialization();
 	circular_buffer_t cb2 = initialization();
@@ -19,7 +20,7 @@ int main (int argc , char* argv[])
 	size_t i = 0;
 	/*filling the (int)integer buffer*/
 	while (cb1.remaining != 0) {
-		cb1.add_item(&cb1 , &values[i]);
+		cb1.add_item(&cb1 , &single_value);
 		i++;
 	}
 	printf("Integer buffer is full now!\n");
